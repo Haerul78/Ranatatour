@@ -10,3 +10,7 @@ Route::get('/', function () {
 Route::get('/tour', function () {
     return Inertia::render('Tour');
 });
+
+Route::get('/event', function () {
+    return Inertia::render('Event');
+});

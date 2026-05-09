@@ -365,7 +365,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="-mx-6 mt-20 bg-merah-ranata text-white md:-mx-10">
+            <section className="mt-20 bg-merah-ranata text-white">
                 <div className="relative mx-auto max-w-6xl overflow-visible px-6 py-14 md:px-10">
                     <motion.div
                         className="pointer-events-none absolute -left-24 top-6 h-48 w-48 rounded-full bg-white/30 blur-3xl"
@@ -447,7 +447,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="-mx-6 bg-[#f7ece6] py-16 md:-mx-10">
+            <section className="bg-[#f7ece6] py-16">
                 <div className="mx-auto max-w-6xl px-6 md:px-10">
                     <div className="text-center">
                         <h2 className="text-3xl font-semibold text-[#4b2e2b]">Klien Kami</h2>
@@ -536,7 +536,7 @@ export default function Home() {
 
                     <div className="relative h-full min-h-[400px] overflow-hidden rounded-2xl">
                         <iframe
-                            className="absolute left-1/2 top-1/2 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2"
+                            className="absolute inset-0 h-full w-full"
                             src="https://www.youtube.com/embed/rAx1qYtXI28?autoplay=1&mute=1&loop=1&playlist=rAx1qYtXI28&controls=0&modestbranding=1&playsinline=1&rel=0"
                             title="Bali scenic video"
                             frameBorder="0"

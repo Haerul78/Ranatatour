@@ -4,7 +4,7 @@ import { div } from "framer-motion/client";
 
 export default function MainLayout({ children }) {
 	return (
-		<div className="w-full">
+		<div className="w-full overflow-x-hidden">
 			<Navbar />
             <main>
 				{children}
