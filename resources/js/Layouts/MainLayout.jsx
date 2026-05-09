@@ -1,14 +1,15 @@
-import Navbar from "@/Components/Navbar";
+import Navbar from "../Components/Navbar";
+import Footer from "../Components/Footer";
 import { div } from "framer-motion/client";
 
 export default function MainLayout({ children }) {
 	return (
-        
-		<div>
+		<div className="w-full">
 			<Navbar />
-            <main className="px-6 pb-16 md:px-10">
+            <main>
 				{children}
 			</main>
+			<Footer />
 		</div>
 	);
 }
