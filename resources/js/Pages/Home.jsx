@@ -150,6 +150,80 @@ export default function Home() {
         },
     ];
 
+    const contactItems = [
+        {
+            label: "Alamat",
+            value: "Jl. Tanah Abang No.12, Jakarta Pusat, DKI Jakarta 10230",
+            icon: (
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-4 w-4"
+                >
+                    <path d="M12 21s7-6.4 7-12a7 7 0 1 0-14 0c0 5.6 7 12 7 12Z" />
+                    <circle cx="12" cy="9" r="2.5" />
+                </svg>
+            ),
+        },
+        {
+            label: "Telepon",
+            value: "(+62) 812 3456 7890",
+            icon: (
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-4 w-4"
+                >
+                    <path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 6.2 2 2 0 0 1 5.1 4h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1l-1.1 1.1a16 16 0 0 0 6.8 6.8l1.1-1.1a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z" />
+                </svg>
+            ),
+        },
+        {
+            label: "Email",
+            value: "info@ranatatour.com",
+            icon: (
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-4 w-4"
+                >
+                    <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" />
+                    <path d="m22 8-10 6L2 8" />
+                </svg>
+            ),
+        },
+        {
+            label: "Jam Operasional",
+            value: "Senin - Jumat, 08.00 - 18.00 WIB",
+            icon: (
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-4 w-4"
+                >
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v5l3 3" />
+                </svg>
+            ),
+        },
+    ];
+
     return (
         <MainLayout>
             <div className="-mx-6 md:-mx-10">
@@ -488,46 +562,42 @@ export default function Home() {
                 </div>
 
                 <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1.1fr]">
-                    <div className="rounded-2xl bg-[#f8eee9] p-6">
+                    <div className="rounded-2xl border border-[#f1e3dd] bg-[#f8eee9] p-6 shadow-[0_10px_24px_rgba(0,0,0,0.08)]">
                         <h3 className="text-lg font-semibold text-[#4b2e2b]">Hubungi Kami</h3>
-                        <div className="mt-4 space-y-4 text-sm text-[#7c6f6a]">
-                            <p>
-                                <span className="block text-xs font-semibold text-[#4b2e2b]">Alamat</span>
-                                Jl. Tanah Abang No.12, Jakarta Pusat, DKI Jakarta 10230
-                            </p>
-                            <p>
-                                <span className="block text-xs font-semibold text-[#4b2e2b]">Telepon</span>
-                                (+62) 812 3456 7890
-                            </p>
-                            <p>
-                                <span className="block text-xs font-semibold text-[#4b2e2b]">Email</span>
-                                info@ranatatour.com
-                            </p>
-                            <p>
-                                <span className="block text-xs font-semibold text-[#4b2e2b]">Jam Operasional</span>
-                                Senin - Jumat, 08.00 - 18.00 WIB
-                            </p>
-                        </div>
+                        <ul className="mt-4 space-y-3 text-sm text-[#7c6f6a]">
+                            {contactItems.map(item => (
+                                <li key={item.label} className="flex items-start gap-3">
+                                    <span className="mt-0.5 flex h-8 w-8 items-center justify-center rounded-full bg-merah-ranata text-white">
+                                        {item.icon}
+                                    </span>
+                                    <div>
+                                        <span className="block text-xs font-semibold text-[#4b2e2b]">{item.label}</span>
+                                        <span>{item.value}</span>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
 
-                        <div className="mt-6 space-y-3">
+                        <p className="mt-6 text-sm font-semibold text-[#4b2e2b]">Kirim Pesan</p>
+                        <div className="mt-3 space-y-3">
                             <input
                                 type="text"
                                 placeholder="Nama Anda"
-                                className="w-full rounded-lg border border-white/70 bg-white px-4 py-2 text-sm"
+                                className="w-full rounded-lg border border-[#ead8d0] bg-white px-4 py-2 text-sm focus:border-merah-ranata focus:outline-none focus:ring-2 focus:ring-merah-ranata/20"
                             />
                             <input
                                 type="email"
                                 placeholder="Email Anda"
-                                className="w-full rounded-lg border border-white/70 bg-white px-4 py-2 text-sm"
+                                className="w-full rounded-lg border border-[#ead8d0] bg-white px-4 py-2 text-sm focus:border-merah-ranata focus:outline-none focus:ring-2 focus:ring-merah-ranata/20"
                             />
                             <textarea
                                 rows="3"
                                 placeholder="Pesan Anda"
-                                className="w-full rounded-lg border border-white/70 bg-white px-4 py-2 text-sm"
+                                className="w-full rounded-lg border border-[#ead8d0] bg-white px-4 py-2 text-sm focus:border-merah-ranata focus:outline-none focus:ring-2 focus:ring-merah-ranata/20"
                             />
                             <button
                                 type="button"
-                                className="w-full rounded-full bg-merah-ranata px-4 py-2 text-sm font-semibold text-white"
+                                className="w-full rounded-md bg-merah-ranata px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700"
                             >
                                 Kirim Pesan
                             </button>

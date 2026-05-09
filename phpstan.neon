@@ -1,0 +1,8 @@
+parameters:
+    stubFiles:
+        - stubs/helpers.php
+    autoload:
+        files:
+            - bootstrap/app.php
+            - stubs/helpers.php
+

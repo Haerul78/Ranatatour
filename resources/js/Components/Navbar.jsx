@@ -11,8 +11,8 @@ export default function Navbar() {
         { label: "Home", href: "/" },
         { label: "Tour", href: "/tour" },
         { label: "Event", href: "#event" },
-        { label: "About Us", href: "#about" },
-        { label: "Contact", href: "#contact" },
+        { label: "About Us", href: "/about-us" },
+        { label: "Contact", href: "/contact" },
     ];
 
     const menuContainer = {

@@ -1,5 +1,8 @@
 <?php
 
+/** @phpstan-ignore-file */
+require_once __DIR__ . '/../stubs/helpers.php';
+
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
@@ -85,7 +88,7 @@ return [
         'papertrail' => [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
-            'handler' => env('LOG_PAPERTRAIL_HANDLER', SyslogUdpHandler::class),
+            'handler' => env('LOG_PAPERTRAIL_HANDLER', SyslogUdpHandler::class), // @phpstan-ignore-line
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
@@ -97,7 +100,7 @@ return [
         'stderr' => [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
-            'handler' => StreamHandler::class,
+            'handler' => StreamHandler::class, // @phpstan-ignore-line
             'handler_with' => [
                 'stream' => 'php://stderr',
             ],
@@ -120,7 +123,7 @@ return [
 
         'null' => [
             'driver' => 'monolog',
-            'handler' => NullHandler::class,
+            'handler' => NullHandler::class, // @phpstan-ignore-line
         ],
 
         'emergency' => [
