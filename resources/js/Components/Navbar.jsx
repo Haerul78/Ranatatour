@@ -6,6 +6,7 @@ export default function Navbar() {
     const { scrollY } = useScroll();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isLangOpen, setIsLangOpen] = useState(false);
     const [shouldAnimate, setShouldAnimate] = useState(false);
 
     const navItems = [
@@ -51,6 +52,14 @@ export default function Navbar() {
             ? "text-[#7c6f6a]"
             : "text-white/80";
     const logoTone = isScrolled ? "opacity-90" : "drop-shadow-[0_8px_18px_rgba(0,0,0,0.35)]";
+    const langButtonTone =
+        isScrolled
+            ? "border-[#e7d9d4] text-[#4b2e2b]"
+            : "border-white/40 text-white";
+    const langDropdownTone =
+        isScrolled
+            ? "border-[#ead8d0] bg-white/90 text-[#4b2e2b]"
+            : "border-white/30 bg-white/20 text-white";
 
     return (
         <motion.nav
@@ -103,6 +112,49 @@ export default function Navbar() {
 
             {/* Button */}
             <div className="flex items-center gap-3">
+                <div className="relative hidden md:flex">
+                    <button
+                        type="button"
+                        onClick={() => setIsLangOpen(prev => !prev)}
+                        className={`inline-flex items-center gap-2 rounded-full px-2 text-xs font-semibold transition hover:text-merah-ranata ${menuText}`}
+                        aria-haspopup="true"
+                        aria-expanded={isLangOpen}
+                    >
+                        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6">
+                            <path d="M12 3a9 9 0 1 0 9 9" />
+                            <path d="M3 12h18" />
+                            <path d="M12 3a12 12 0 0 1 0 18" />
+                            <path d="M12 3a12 12 0 0 0 0 18" />
+                        </svg>
+                        <span>ID | EN</span>
+                    </button>
+                    <AnimatePresence>
+                        {isLangOpen && (
+                            <motion.div
+                                className={`absolute right-0 mt-2 w-28 rounded-2xl border px-1 py-1 shadow-[0_12px_28px_rgba(0,0,0,0.2)] backdrop-blur-md ${langDropdownTone}`}
+                                initial={{ opacity: 0, y: -6 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -6 }}
+                                transition={{ duration: 0.18, ease: "easeOut" }}
+                            >
+                                <button
+                                    type="button"
+                                    onClick={() => setIsLangOpen(false)}
+                                    className="w-full rounded-xl px-3 py-2 text-left text-xs font-semibold transition hover:text-merah-ranata"
+                                >
+                                    ID
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setIsLangOpen(false)}
+                                    className="w-full rounded-xl px-3 py-2 text-left text-xs font-semibold transition hover:text-merah-ranata"
+                                >
+                                    EN
+                                </button>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
                 <motion.button
                     type="button"
                     className="hidden rounded-full bg-merah-ranata px-5 py-2 text-sm font-semibold text-white transition hover:bg-red-700 md:inline-flex"
@@ -111,9 +163,55 @@ export default function Navbar() {
                 >
                     Login
                 </motion.button>
+                <div className="relative md:hidden">
+                    <button
+                        type="button"
+                        onClick={() => setIsLangOpen(prev => !prev)}
+                        className={`inline-flex h-11 items-center gap-2 rounded-full border px-3 text-xs font-semibold ${langButtonTone}`}
+                        aria-haspopup="true"
+                        aria-expanded={isLangOpen}
+                    >
+                        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6">
+                            <path d="M12 3a9 9 0 1 0 9 9" />
+                            <path d="M3 12h18" />
+                            <path d="M12 3a12 12 0 0 1 0 18" />
+                            <path d="M12 3a12 12 0 0 0 0 18" />
+                        </svg>
+                        <span>ID/EN</span>
+                    </button>
+                    <AnimatePresence>
+                        {isLangOpen && (
+                            <motion.div
+                                className={`absolute right-0 mt-2 w-28 rounded-2xl border px-1 py-1 shadow-[0_12px_28px_rgba(0,0,0,0.2)] backdrop-blur-md ${langDropdownTone}`}
+                                initial={{ opacity: 0, y: -6 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -6 }}
+                                transition={{ duration: 0.18, ease: "easeOut" }}
+                            >
+                                <button
+                                    type="button"
+                                    onClick={() => setIsLangOpen(false)}
+                                    className="w-full rounded-xl px-3 py-2 text-left text-xs font-semibold transition hover:text-merah-ranata"
+                                >
+                                    ID
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setIsLangOpen(false)}
+                                    className="w-full rounded-xl px-3 py-2 text-left text-xs font-semibold transition hover:text-merah-ranata"
+                                >
+                                    EN
+                                </button>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
                 <motion.button
     type="button"
-    onClick={() => setIsMenuOpen(prev => !prev)}
+    onClick={() => {
+        setIsLangOpen(false);
+        setIsMenuOpen(prev => !prev);
+    }}
     className={`inline-flex h-11 w-11 flex-col items-center justify-center gap-1 rounded-full border transition md:hidden ${
         isScrolled || isMenuOpen
             ? "border-[#e7d9d4] text-[#4b2e2b]"

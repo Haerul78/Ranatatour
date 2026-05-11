@@ -78,44 +78,46 @@ export default function Tour() {
 
             <section className="mx-auto mt-14 max-w-6xl px-6 md:px-10">
                 <div className="text-center">
-                    <h2 className="text-3xl font-semibold text-[#4b2e2b]">
+                    <h2 className="text-2xl font-semibold leading-tight text-[#4b2e2b] sm:text-3xl md:text-4xl">
                         Wujudkan liburan <span className="text-merah-ranata">impianmu</span>
                     </h2>
-                    <p className="mt-2 text-sm text-[#7c6f6a]">ukir cerita baru di setiap destinasi.</p>
+                    <p className="mt-2 text-sm text-[#7c6f6a] sm:text-base">ukir cerita baru di setiap destinasi.</p>
                 </div>
 
-                <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
-                    <div className="flex flex-wrap gap-3">
+                <div className="mt-6 space-y-4">
+                    <div className="flex w-full items-center">
+                        <div className="relative w-full md:ml-auto md:max-w-sm">
+                            <input
+                                type="text"
+                                placeholder="Search"
+                                className="h-11 w-full rounded-full border-[0.5px] border-[#d6d6d6] bg-white px-5 pr-12 text-sm text-[#7c6f6a] shadow-sm focus:outline-none focus:ring-2 focus:ring-merah-ranata/20"
+                            />
+                            <button
+                                type="button"
+                                className="absolute right-1 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-merah-ranata text-white"
+                                aria-label="Search"
+                            >
+                                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <circle cx="11" cy="11" r="7" />
+                                    <path d="M20 20l-3.5-3.5" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div className="-mx-1 flex items-center gap-2 overflow-x-auto px-1 pb-1 md:mx-0 md:flex-wrap md:overflow-visible md:px-0 md:pb-0">
                         {filters.map(item => (
                             <button
                                 key={item}
                                 type="button"
-                                className={`rounded-full px-4 py-2 text-xs font-semibold transition ${
+                                className={`shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition ${
                                     item === "Semua"
                                         ? "bg-merah-ranata text-white"
-                                        : "border border-[#e7d9d4] text-[#7c6f6a] hover:border-merah-ranata hover:text-merah-ranata"
+                                        : "border-[0.5px] border-[#d6d6d6] text-[#7c6f6a] hover:border-merah-ranata hover:text-merah-ranata"
                                 }`}
                             >
                                 {item}
                             </button>
                         ))}
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <input
-                            type="text"
-                            placeholder="Search"
-                            className="h-10 w-48 rounded-full border border-[#e7d9d4] bg-white px-4 text-xs text-[#7c6f6a] focus:outline-none"
-                        />
-                        <button
-                            type="button"
-                            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-merah-ranata text-white"
-                            aria-label="Search"
-                        >
-                            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-                                <circle cx="11" cy="11" r="7" />
-                                <path d="M20 20l-3.5-3.5" />
-                            </svg>
-                        </button>
                     </div>
                 </div>
 

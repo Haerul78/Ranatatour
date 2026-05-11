@@ -269,15 +269,15 @@ export default function Home() {
                     </p>
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="-mx-1 mt-6 flex items-center gap-2 overflow-x-auto px-1 pb-1 md:mx-0 md:flex-wrap md:overflow-visible md:px-0 md:pb-0">
                     {["Semua", "Bali", "Jakarta", "Yogyakarta", "Surabaya", "Bandung"].map(item => (
                         <button
                             key={item}
                             type="button"
-                            className={`rounded-full px-4 py-2 text-xs font-semibold transition ${
+                            className={`shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition ${
                                 item === "Semua"
                                     ? "bg-merah-ranata text-white"
-                                    : "border border-[#e7d9d4] text-[#7c6f6a] hover:border-merah-ranata hover:text-merah-ranata"
+                                    : "border-[0.5px] border-[#d6d6d6] text-[#7c6f6a] hover:border-merah-ranata hover:text-merah-ranata"
                             }`}
                         >
                             {item}
@@ -350,15 +350,15 @@ export default function Home() {
         </p>
     </div>
 
-    <div className="mt-6 flex flex-wrap gap-3">
+    <div className="-mx-1 mt-6 flex items-center gap-2 overflow-x-auto px-1 pb-1 md:mx-0 md:flex-wrap md:overflow-visible md:px-0 md:pb-0">
         {["Semua", "Musik", "Festival", "Seni", "Olahraga"].map(item => (
             <button
                 key={item}
                 type="button"
-                className={`rounded-full px-4 py-2 text-xs font-semibold transition ${
+                className={`shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition ${
                     item === "Semua"
                         ? "bg-merah-ranata text-white"
-                        : "border border-[#e7d9d4] text-[#7c6f6a] hover:border-merah-ranata hover:text-merah-ranata"
+                        : "border-[0.5px] border-[#d6d6d6] text-[#7c6f6a] hover:border-merah-ranata hover:text-merah-ranata"
                 }`}
             >
                 {item}
