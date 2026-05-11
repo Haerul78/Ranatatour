@@ -11,9 +11,9 @@ export default function Navbar() {
     const navItems = [
         { label: "Home", href: "/" },
         { label: "Tour", href: "/tour" },
-        { label: "Event", href: "#event" },
-        { label: "About Us", href: "#about" },
-        { label: "Contact", href: "#contact" },
+        { label: "Event", href: "/event" },
+        { label: "About Us", href: "/about-us" },
+        { label: "Contact", href: "/contact" },
     ];
 
     const menuContainer = {
@@ -43,32 +43,29 @@ export default function Navbar() {
     }, []);
 
     const navText =
-        isScrolled || isMenuOpen
+        isScrolled
             ? "text-[#4b2e2b]"
             : "text-white";
     const menuText =
-        isScrolled || isMenuOpen
+        isScrolled
             ? "text-[#7c6f6a]"
             : "text-white/80";
-    const logoTone = isScrolled || isMenuOpen ? "opacity-90" : "drop-shadow-[0_8px_18px_rgba(0,0,0,0.35)]";
+    const logoTone = isScrolled ? "opacity-90" : "drop-shadow-[0_8px_18px_rgba(0,0,0,0.35)]";
 
     return (
         <motion.nav
             className="fixed top-0 left-0 z-50 flex w-full items-center justify-between px-6 py-5 transition-all duration-300 md:px-10"
             initial={false}
             animate={{
-                backgroundColor:
-                    isScrolled || isMenuOpen
-                        ? "rgba(255, 255, 255, 0.98)"
-                        : "rgba(255, 255, 255, 0)",
-                boxShadow:
-                    isScrolled || isMenuOpen
-                        ? "0 12px 32px rgba(15, 23, 42, 0.08)"
-                        : "0 0 0 rgba(0,0,0,0)",
-                backdropFilter:
-                    isScrolled || isMenuOpen
-                        ? "blur(10px)"
-                        : "blur(0px)",
+                backgroundColor: isScrolled
+                    ? "rgba(255, 255, 255, 0.98)"
+                    : "rgba(255, 255, 255, 0)",
+                boxShadow: isScrolled
+                    ? "0 12px 32px rgba(15, 23, 42, 0.08)"
+                    : "0 0 0 rgba(0,0,0,0)",
+                backdropFilter: isScrolled
+                    ? "blur(10px)"
+                    : "blur(0px)",
             }}
             transition={{ duration: 0.25, ease: "easeOut" }}
         >
@@ -80,7 +77,8 @@ export default function Navbar() {
                     className={`h-9 w-auto transition ${logoTone}`}
                 />
                 <h1 className={`text-xl font-semibold md:text-2xl ${navText}`}>
-                    Ranata<span className={isScrolled ? "text-merah-ranata" : "text-[#f2b7a5]"}>Tour</span>
+                    {/* Ranata<span className={isScrolled ? "text-merah-ranata" : "text-[#f2b7a5]"}>Tour</span> */}
+                    Ranata<span className="text-merah-ranata">Tour</span>
                 </h1>
             </div>
 
@@ -114,20 +112,35 @@ export default function Navbar() {
                     Login
                 </motion.button>
                 <motion.button
-                    type="button"
-                    onClick={() => setIsMenuOpen(prev => !prev)}
-                    className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition md:hidden ${
-                        isScrolled || isMenuOpen
-                            ? "border-[#e7d9d4] text-[#4b2e2b]"
-                            : "border-white/40 text-white"
-                    }`}
-                    whileTap={{ scale: 0.95 }}
-                >
-                    <span className="sr-only">Toggle menu</span>
-                    <span className="block h-0.5 w-4 rounded-full bg-current" />
-                    <span className="mt-1 block h-0.5 w-4 rounded-full bg-current" />
-                    <span className="mt-1 block h-0.5 w-4 rounded-full bg-current" />
-                </motion.button>
+    type="button"
+    onClick={() => setIsMenuOpen(prev => !prev)}
+    className={`inline-flex h-11 w-11 flex-col items-center justify-center gap-1 rounded-full border transition md:hidden ${
+        isScrolled || isMenuOpen
+            ? "border-[#e7d9d4] text-[#4b2e2b]"
+            : "border-white/40 text-white"
+    }`}
+    whileTap={{ scale: 0.95 }}
+>
+    <span className="sr-only">Toggle menu</span>
+
+    <span
+        className={`block h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
+            isMenuOpen ? "translate-y-1.5 rotate-45" : ""
+        }`}
+    />
+
+    <span
+        className={`block h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
+            isMenuOpen ? "opacity-0" : ""
+        }`}
+    />
+
+    <span
+        className={`block h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
+            isMenuOpen ? "-translate-y-1.5 -rotate-45" : ""
+        }`}
+    />
+</motion.button>
             </div>
 
             <AnimatePresence>

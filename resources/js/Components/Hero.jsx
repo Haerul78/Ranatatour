@@ -19,7 +19,7 @@ export default function Hero() {
     }, [images.length]);
 
     return (
-        <section className="relative min-h-[90vh] overflow-hidden text-white">
+        <section className="relative min-h-[80vh] overflow-hidden text-white px-6 md:px-10">
             {images.map((src, index) => (
                 <img
                     key={src}
@@ -38,7 +38,7 @@ export default function Hero() {
                 <div className="max-w-2xl">
                     <p className="mb-3 text-sm uppercase tracking-[0.2em] text-white/80">Ranata Tour</p>
                     <h1 className="text-4xl font-semibold leading-tight md:text-6xl">
-                        Ibu Kota yang <span className="text-[#f2b7a5]">Penuh Warna</span>, Cerita,
+                        Ibu Kota yang <span className="text-merah-ranata">Penuh Warna</span>, Cerita,
                         dan Kehidupan
                     </h1>
                     <p className="mt-5 text-base text-white/80 md:text-lg">

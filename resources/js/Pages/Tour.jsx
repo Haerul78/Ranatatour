@@ -56,7 +56,7 @@ export default function Tour() {
 
     return (
         <MainLayout>
-            <section className="relative min-h-[60vh] overflow-hidden text-white">
+            <section className="relative min-h-[60vh] overflow-hidden text-white px-6 md:px-10">
                 <img
                     src="/images/Jakarta.jpg"
                     alt="Paket Tour Premium"
@@ -67,7 +67,7 @@ export default function Tour() {
                     <div className="max-w-2xl">
                         <p className="text-sm uppercase tracking-[0.2em] text-white/80">Ranata Tour</p>
                         <h1 className="mt-4 text-4xl font-semibold md:text-6xl">
-                            Paket <span className="text-[#f2b7a5]">Tour</span> Premium
+                            Paket <span className="text-merah-ranata">Tour</span> Premium
                         </h1>
                         <p className="mt-4 text-base text-white/80">
                             Jelajahi keindahan Indonesia dengan paket tour eksklusif kami.
@@ -76,7 +76,7 @@ export default function Tour() {
                 </div>
             </section>
 
-            <section className="mx-auto mt-14 max-w-6xl">
+            <section className="mx-auto mt-14 max-w-6xl px-6 md:px-10">
                 <div className="text-center">
                     <h2 className="text-3xl font-semibold text-[#4b2e2b]">
                         Wujudkan liburan <span className="text-merah-ranata">impianmu</span>
