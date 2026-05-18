@@ -159,14 +159,18 @@ export default function Navbar() {
                         )}
                     </AnimatePresence>
                 </div>
-                <motion.button
-                    type="button"
-                    className="hidden rounded-full bg-merah-ranata px-5 py-2 text-sm font-semibold text-white transition hover:bg-red-700 md:inline-flex"
+                <motion.div
+                    className="hidden md:inline-flex"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                 >
-                    Login
-                </motion.button>
+                    <Link
+                        href="/login"
+                        className="rounded-full bg-merah-ranata px-5 py-2 text-sm font-semibold text-white transition hover:bg-red-700"
+                    >
+                        Login
+                    </Link>
+                </motion.div>
                 <div className="relative md:hidden">
                     <button
                         type="button"

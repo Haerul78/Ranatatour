@@ -1,3 +1,4 @@
+import { Link } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 
 export default function Hero() {
@@ -8,9 +9,6 @@ export default function Hero() {
         "/images/Surabaya.jpg",
         "/images/Yogyakarta.jpg",
     ];
-    const whatsappNumber = "6281234567890";
-    const whatsappMessage = "Halo Admin, saya ingin bertanya tentang paket tour.";
-    const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
     const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
@@ -48,12 +46,12 @@ export default function Hero() {
                         Jelajahi keindahan Jakarta bersama Ranata Tour. Pengalaman perjalanan nyaman yang
                         tak terlupakan.
                     </p>
-                    <button
-                        type="button"
-                        className="mt-7 rounded-full bg-merah-ranata px-6 py-3 text-sm font-semibold tracking-wide text-white transition hover:bg-red-700"
+                    <Link
+                        href="/tour"
+                        className="mt-7 inline-block rounded-full bg-merah-ranata px-6 py-3 text-sm font-semibold tracking-wide text-white transition hover:bg-red-700"
                     >
                         Lihat Temu Tour
-                    </button>
+                    </Link>
                 </div>
             </div>
         </section>

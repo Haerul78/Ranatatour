@@ -18,7 +18,7 @@ class ClientController extends Controller
 
     public function create()
     {
-        return view('admin.clients.create');
+        return Inertia::render('Admin/Clients/Create');
     }
 
     public function store(Request $request)
@@ -40,7 +40,7 @@ class ClientController extends Controller
 
     public function edit(Client $client)
     {
-        return view('admin.clients.edit', ['client' => $client]);
+        return Inertia::render('Admin/Clients/Edit', ['client' => $client]);
     }
 
     public function update(Request $request, Client $client)

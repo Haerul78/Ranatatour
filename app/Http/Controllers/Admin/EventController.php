@@ -18,7 +18,7 @@ class EventController extends Controller
 
     public function create()
     {
-        return view('admin.events.create');
+        return Inertia::render('Admin/Events/Create');
     }
 
     public function store(Request $request)
@@ -45,7 +45,7 @@ class EventController extends Controller
 
     public function edit(Event $event)
     {
-        return view('admin.events.edit', ['event' => $event]);
+        return Inertia::render('Admin/Events/Edit', ['event' => $event]);
     }
 
     public function update(Request $request, Event $event)

@@ -83,7 +83,7 @@ class AdminAuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/admin/login');
+        return Inertia::location('/login');
     }
 
     private function isDefaultAdminCredentials(array $credentials): bool

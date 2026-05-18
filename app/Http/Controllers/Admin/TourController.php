@@ -18,7 +18,7 @@ class TourController extends Controller
 
     public function create()
     {
-        return view('admin.tours.create');
+        return Inertia::render('Admin/Tours/Create');
     }
 
     public function store(Request $request)
@@ -45,7 +45,7 @@ class TourController extends Controller
 
     public function edit(Tour $tour)
     {
-        return view('admin.tours.edit', ['tour' => $tour]);
+        return Inertia::render('Admin/Tours/Edit', ['tour' => $tour]);
     }
 
     public function update(Request $request, Tour $tour)

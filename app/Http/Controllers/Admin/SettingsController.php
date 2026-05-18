@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SettingsController extends Controller
 {
@@ -16,7 +17,7 @@ class SettingsController extends Controller
             $settings = SiteSetting::create([]);
         }
 
-        return view('admin.settings.edit', ['settings' => $settings]);
+        return Inertia::render('Admin/Settings/Edit', ['settings' => $settings]);
     }
 
     public function update(Request $request)

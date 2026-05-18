@@ -18,7 +18,7 @@ class ArticleController extends Controller
 
     public function create()
     {
-        return view('admin.articles.create');
+        return Inertia::render('Admin/Articles/Create');
     }
 
     public function store(Request $request)
@@ -43,7 +43,7 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        return view('admin.articles.edit', ['article' => $article]);
+        return Inertia::render('Admin/Articles/Edit', ['article' => $article]);
     }
 
     public function update(Request $request, Article $article)
