@@ -20,13 +20,14 @@ export default function Home({ tours = [], events: eventsProp = [], articles = [
     };
 
     const handleClientScroll = () => {
-        if (!clientSliderRef.current) {
-            return;
-        }
+        if (!clientSliderRef.current) return;
 
-        const { scrollLeft, clientWidth } = clientSliderRef.current;
-        const nextIndex = Math.round(scrollLeft / clientWidth);
-        setActiveClientSlide(nextIndex);
+        const scrollLeft = clientSliderRef.current.scrollLeft;
+        const width = clientSliderRef.current.offsetWidth;
+
+        const index = Math.round(scrollLeft / width);
+
+        setActiveClientSlide(index);
     };
 
     const destinations = [
@@ -110,6 +111,24 @@ export default function Home({ tours = [], events: eventsProp = [], articles = [
             date: "10 April 2026",
             image: "/images/Borobudur.jpg",
             label: "Tips",
+        },
+        {
+            title: "Kuliner Khas Jakarta yang Harus Dicoba",
+            date: "8 April 2026",
+            image: "/images/Bali.jpg",
+            label: "Kuliner",
+        },
+        {
+            title: "Kuliner Khas Jakarta yang Harus Dicoba",
+            date: "8 April 2026",
+            image: "/images/Bali.jpg",
+            label: "Kuliner",
+        },
+        {
+            title: "Kuliner Khas Jakarta yang Harus Dicoba",
+            date: "8 April 2026",
+            image: "/images/Bali.jpg",
+            label: "Kuliner",
         },
         {
             title: "Kuliner Khas Jakarta yang Harus Dicoba",
@@ -295,7 +314,7 @@ export default function Home({ tours = [], events: eventsProp = [], articles = [
                 <Hero />
             </div>
 
-            <section className="mx-auto mt-16 max-w-6xl">
+            <section className="mx-auto mt-16 max-w-6xl px-6 md:px-10">
                 <div className="flex flex-col gap-3">
                     <h2 className="text-3xl font-semibold text-[#4b2e2b]">Mulai Petualangan Impianmu</h2>
                     <p className="text-sm text-[#7c6f6a]">
@@ -303,15 +322,15 @@ export default function Home({ tours = [], events: eventsProp = [], articles = [
                     </p>
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="-mx-1 mt-6 flex items-center gap-2 overflow-x-auto px-1 pb-1 md:mx-0 md:flex-wrap md:overflow-visible md:px-0 md:pb-0">
                     {["Semua", "Bali", "Jakarta", "Yogyakarta", "Surabaya", "Bandung"].map(item => (
                         <button
                             key={item}
                             type="button"
-                            className={`rounded-full px-4 py-2 text-xs font-semibold transition ${
+                            className={`shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition ${
                                 item === "Semua"
                                     ? "bg-merah-ranata text-white"
-                                    : "border border-[#e7d9d4] text-[#7c6f6a] hover:border-merah-ranata hover:text-merah-ranata"
+                                    : "border-[0.5px] border-[#d6d6d6] text-[#7c6f6a] hover:border-merah-ranata hover:text-merah-ranata"
                             }`}
                         >
                             {item}
@@ -344,18 +363,18 @@ export default function Home({ tours = [], events: eventsProp = [], articles = [
                                 key={`${item.title}-${index}`}
                                 className="w-[70%] flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-sm sm:w-[45%] md:w-[32%] lg:w-[calc(25%-12px)]"
                             >
-                                <div className="relative h-40">
+                                <div className="relative h-28 sm:h-36 md:h-40">
                                     <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
                                     <span className="absolute left-3 top-3 rounded-full bg-merah-ranata px-3 py-1 text-[10px] font-semibold uppercase text-white">
                                         {item.badge}
                                     </span>
                                 </div>
-                                <div className="space-y-2 p-4">
-                                    <h3 className="text-sm font-semibold text-[#4b2e2b]">{item.title}</h3>
-                                    <p className="text-xs text-[#9b8f8a]">{item.location}</p>
+                                <div className="space-y-1 p-3 sm:p-4">
+                                    <h3 className="text-xs font-semibold sm:text-sm text-[#4b2e2b]">{item.title}</h3>
+                                    <p className="text-xs sm:text-sm text-[#9b8f8a]">{item.location}</p>
                                     <div className="flex items-center justify-between">
-                                        <span className="text-sm font-semibold text-merah-ranata">{item.price}</span>
-                                        <span className="text-xs text-[#9b8f8a]">4D3N</span>
+                                        <span className="text-xs sm:text-sm font-semibold text-merah-ranata">{item.price}</span>
+                                        <span className="text-xs sm:text-sm text-[#9b8f8a]">4D3N</span>
                                     </div>
                                 </div>
                             </article>
@@ -373,45 +392,49 @@ export default function Home({ tours = [], events: eventsProp = [], articles = [
                 </div>
             </section>
 
-            <section className="mx-auto mt-16 max-w-6xl">
-                <div className="flex flex-col gap-3">
-                    <h2 className="text-3xl font-semibold text-[#4b2e2b]">Agenda Seru Menantimu</h2>
-                    <p className="text-sm text-[#7c6f6a]">
-                        Temukan event menarik yang menunggu untuk kamu kunjungi hari ini.
-                    </p>
-                </div>
+            <section className="mx-auto mt-16 max-w-6xl px-6 md:px-10">
+    <div className="flex flex-col gap-3">
+        <h2 className="text-3xl font-semibold text-[#4b2e2b]">
+            Agenda Seru Menantimu
+        </h2>
 
-                <div className="mt-6 flex flex-wrap gap-3">
-                    {["Semua", "Musik", "Festival", "Seni", "Olahraga"].map(item => (
-                        <button
-                            key={item}
-                            type="button"
-                            className={`rounded-full px-4 py-2 text-xs font-semibold transition ${
-                                item === "Semua"
-                                    ? "bg-merah-ranata text-white"
-                                    : "border border-[#e7d9d4] text-[#7c6f6a] hover:border-merah-ranata hover:text-merah-ranata"
-                            }`}
-                        >
-                            {item}
-                        </button>
-                    ))}
-                </div>
+        <p className="text-sm text-[#7c6f6a]">
+            Temukan event menarik yang menunggu untuk kamu kunjungi hari ini.
+        </p>
+    </div>
 
-                <div className="relative mt-8 overflow-hidden">
-                    <button
-                        type="button"
-                        onClick={() => handleScroll(eventSliderRef, "left")}
-                        className="absolute left-0 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#e7d9d4] bg-white/95 text-[#7c6f6a] shadow-md transition hover:border-merah-ranata hover:text-merah-ranata lg:inline-flex"
-                    >
-                        <span className="text-lg">&#8592;</span>
-                    </button>
-                    <button
-                        type="button"
-                        onClick={() => handleScroll(eventSliderRef, "right")}
-                        className="absolute right-0 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#e7d9d4] bg-white/95 text-[#7c6f6a] shadow-md transition hover:border-merah-ranata hover:text-merah-ranata lg:inline-flex"
-                    >
-                        <span className="text-lg">&#8594;</span>
-                    </button>
+    <div className="-mx-1 mt-6 flex items-center gap-2 overflow-x-auto px-1 pb-1 md:mx-0 md:flex-wrap md:overflow-visible md:px-0 md:pb-0">
+        {["Semua", "Musik", "Festival", "Seni", "Olahraga"].map(item => (
+            <button
+                key={item}
+                type="button"
+                className={`shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition ${
+                    item === "Semua"
+                        ? "bg-merah-ranata text-white"
+                        : "border-[0.5px] border-[#d6d6d6] text-[#7c6f6a] hover:border-merah-ranata hover:text-merah-ranata"
+                }`}
+            >
+                {item}
+            </button>
+        ))}
+    </div>
+
+    <div className="relative mt-8 overflow-hidden">
+        <button
+            type="button"
+            onClick={() => handleScroll(eventSliderRef, "left")}
+            className="absolute left-0 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#e7d9d4] bg-white/95 text-[#7c6f6a] shadow-md transition hover:border-merah-ranata hover:text-merah-ranata lg:inline-flex"
+        >
+            <span className="text-lg">&#8592;</span>
+        </button>
+
+        <button
+            type="button"
+            onClick={() => handleScroll(eventSliderRef, "right")}
+            className="absolute right-0 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#e7d9d4] bg-white/95 text-[#7c6f6a] shadow-md transition hover:border-merah-ranata hover:text-merah-ranata lg:inline-flex"
+        >
+            <span className="text-lg">&#8594;</span>
+        </button>
 
         <div
             ref={eventSliderRef}
@@ -458,41 +481,46 @@ export default function Home({ tours = [], events: eventsProp = [], articles = [
         </div>
     </div>
 
-                <div className="mt-8 flex justify-center">
-                    <button
-                        type="button"
-                        className="rounded-full border border-merah-ranata px-6 py-2 text-sm font-semibold text-merah-ranata transition hover:bg-merah-ranata hover:text-white"
-                    >
-                        Lihat semua
-                    </button>
-                </div>
-            </section>
+    <div className="mt-8 flex justify-center">
+        <button
+            type="button"
+            className="rounded-full border border-merah-ranata px-6 py-2 text-sm font-semibold text-merah-ranata transition hover:bg-merah-ranata hover:text-white"
+        >
+            Lihat semua
+        </button>
+    </div>
+</section>
 
-            <section className="mx-auto mt-20 max-w-6xl">
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                    <div className="text-center md:text-left">
-                        <h2 className="text-3xl font-semibold text-[#4b2e2b]">Cerita & Inspirasi</h2>
-                        <p className="mt-2 text-sm text-[#7c6f6a]">
-                            Temukan inspirasi perjalanan dan cerita menarik dari berbagai destinasi.
-                        </p>
-                    </div>
-                    <div className="hidden items-center gap-3 lg:flex">
-                        <button
-                            type="button"
-                            onClick={() => handleScroll(storySliderRef, "left")}
-                            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#e7d9d4] text-[#7c6f6a] transition hover:border-merah-ranata hover:text-merah-ranata"
-                        >
-                            <span className="text-lg">&#8592;</span>
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => handleScroll(storySliderRef, "right")}
-                            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#e7d9d4] text-[#7c6f6a] transition hover:border-merah-ranata hover:text-merah-ranata"
-                        >
-                            <span className="text-lg">&#8594;</span>
-                        </button>
-                    </div>
-                </div>
+            <section className="mx-auto mt-20 max-w-6xl px-6 md:px-10">
+    <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="text-center md:text-left">
+            <h2 className="text-3xl font-semibold text-[#4b2e2b]">
+                Cerita & Inspirasi
+            </h2>
+
+            <p className="mt-2 text-sm text-[#7c6f6a]">
+                Temukan inspirasi perjalanan dan cerita menarik dari berbagai destinasi.
+            </p>
+        </div>
+
+        <div className="hidden items-center gap-3 lg:flex">
+            <button
+                type="button"
+                onClick={() => handleScroll(storySliderRef, "left")}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#e7d9d4] text-[#7c6f6a] transition hover:border-merah-ranata hover:text-merah-ranata"
+            >
+                <span className="text-lg">&#8592;</span>
+            </button>
+
+            <button
+                type="button"
+                onClick={() => handleScroll(storySliderRef, "right")}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#e7d9d4] text-[#7c6f6a] transition hover:border-merah-ranata hover:text-merah-ranata"
+            >
+                <span className="text-lg">&#8594;</span>
+            </button>
+        </div>
+    </div>
 
     <div
         ref={storySliderRef}
@@ -539,7 +567,7 @@ export default function Home({ tours = [], events: eventsProp = [], articles = [
     </div>
 </section>
 
-            <section className="-mx-6 mt-20 bg-merah-ranata text-white md:-mx-10">
+            <section className="mt-20 bg-merah-ranata text-white">
                 <div className="relative mx-auto max-w-6xl overflow-visible px-6 py-14 md:px-10">
                     <motion.div
                         className="pointer-events-none absolute -left-24 top-6 h-48 w-48 rounded-full bg-white/30 blur-3xl"
@@ -567,14 +595,14 @@ export default function Home({ tours = [], events: eventsProp = [], articles = [
                         transition={{ duration: 100, repeat: Infinity, ease: "easeInOut" }}
                     />
 
-                    <div className="relative grid gap-6 text-center sm:grid-cols-2 md:grid-cols-4">
+                    <div className="relative grid grid-cols-2 gap-8 text-center md:grid-cols-4">
                         {stats.map(item => (
-                            <div key={item.label} className="flex flex-col items-center gap-3">
-                                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white">
+                            <div key={item.label} className="flex flex-col items-center gap-2 rounded-2xl bg-white/5 p-4 backdrop-blur-sm">
+                                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white md:h-10 md:w-10">
                                     {item.icon}
                                 </span>
                                 <div>
-                                    <p className="text-2xl font-semibold">{item.value}</p>
+                                    <p className="text-xl font-semibold md:text-2xl">{item.value}</p>
                                     <p className="mt-1 text-xs text-white/70">{item.label}</p>
                                 </div>
                             </div>
@@ -621,14 +649,17 @@ export default function Home({ tours = [], events: eventsProp = [], articles = [
                 </div>
             </section>
 
-            <section className="-mx-6 bg-[#f7ece6] py-16 md:-mx-10">
-                <div className="mx-auto max-w-6xl px-6 md:px-10">
-                    <div className="text-center">
-                        <h2 className="text-3xl font-semibold text-[#4b2e2b]">Klien Kami</h2>
-                        <p className="mt-2 text-sm text-[#7c6f6a]">
-                            Dipercaya oleh perusahaan-perusahaan terkemuka di Indonesia
-                        </p>
-                    </div>
+            <section className="bg-[#f7ece6] py-16">
+    <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="text-center">
+            <h2 className="text-3xl font-semibold text-[#4b2e2b]">
+                Klien Kami
+            </h2>
+
+            <p className="mt-2 text-sm text-[#7c6f6a]">
+                Dipercaya oleh perusahaan-perusahaan terkemuka di Indonesia
+            </p>
+        </div>
 
         {/* MOBILE SLIDER */}
         <div className="mt-10 md:hidden">
@@ -689,46 +720,42 @@ export default function Home({ tours = [], events: eventsProp = [], articles = [
                 </div>
 
                 <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1.1fr]">
-                    <div className="rounded-2xl bg-[#f8eee9] p-6">
+                    <div className="rounded-2xl border border-[#f1e3dd] bg-[#f8eee9] p-6 shadow-[0_10px_24px_rgba(0,0,0,0.08)]">
                         <h3 className="text-lg font-semibold text-[#4b2e2b]">Hubungi Kami</h3>
-                        <div className="mt-4 space-y-4 text-sm text-[#7c6f6a]">
-                            <p>
-                                <span className="block text-xs font-semibold text-[#4b2e2b]">Alamat</span>
-                                Jl. Tanah Abang No.12, Jakarta Pusat, DKI Jakarta 10230
-                            </p>
-                            <p>
-                                <span className="block text-xs font-semibold text-[#4b2e2b]">Telepon</span>
-                                (+62) 812 3456 7890
-                            </p>
-                            <p>
-                                <span className="block text-xs font-semibold text-[#4b2e2b]">Email</span>
-                                info@ranatatour.com
-                            </p>
-                            <p>
-                                <span className="block text-xs font-semibold text-[#4b2e2b]">Jam Operasional</span>
-                                Senin - Jumat, 08.00 - 18.00 WIB
-                            </p>
-                        </div>
+                        <ul className="mt-4 space-y-3 text-sm text-[#7c6f6a]">
+                            {contactItems.map(item => (
+                                <li key={item.label} className="flex items-start gap-3">
+                                    <span className="mt-0.5 flex h-8 w-8 items-center justify-center rounded-full bg-merah-ranata text-white">
+                                        {item.icon}
+                                    </span>
+                                    <div>
+                                        <span className="block text-xs font-semibold text-[#4b2e2b]">{item.label}</span>
+                                        <span>{item.value}</span>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
 
-                        <div className="mt-6 space-y-3">
+                        <p className="mt-6 text-sm font-semibold text-[#4b2e2b]">Kirim Pesan</p>
+                        <div className="mt-3 space-y-3">
                             <input
                                 type="text"
                                 placeholder="Nama Anda"
-                                className="w-full rounded-lg border border-white/70 bg-white px-4 py-2 text-sm"
+                                className="w-full rounded-lg border border-[#ead8d0] bg-white px-4 py-2 text-sm focus:border-merah-ranata focus:outline-none focus:ring-2 focus:ring-merah-ranata/20"
                             />
                             <input
                                 type="email"
                                 placeholder="Email Anda"
-                                className="w-full rounded-lg border border-white/70 bg-white px-4 py-2 text-sm"
+                                className="w-full rounded-lg border border-[#ead8d0] bg-white px-4 py-2 text-sm focus:border-merah-ranata focus:outline-none focus:ring-2 focus:ring-merah-ranata/20"
                             />
                             <textarea
                                 rows="3"
                                 placeholder="Pesan Anda"
-                                className="w-full rounded-lg border border-white/70 bg-white px-4 py-2 text-sm"
+                                className="w-full rounded-lg border border-[#ead8d0] bg-white px-4 py-2 text-sm focus:border-merah-ranata focus:outline-none focus:ring-2 focus:ring-merah-ranata/20"
                             />
                             <button
                                 type="button"
-                                className="w-full rounded-full bg-merah-ranata px-4 py-2 text-sm font-semibold text-white"
+                                className="w-full rounded-md bg-merah-ranata px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700"
                             >
                                 Kirim Pesan
                             </button>
@@ -737,7 +764,7 @@ export default function Home({ tours = [], events: eventsProp = [], articles = [
 
                     <div className="relative h-full min-h-[400px] overflow-hidden rounded-2xl">
                         <iframe
-                            className="absolute left-1/2 top-1/2 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2"
+                            className="absolute inset-0 h-full w-full"
                             src="https://www.youtube.com/embed/rAx1qYtXI28?autoplay=1&mute=1&loop=1&playlist=rAx1qYtXI28&controls=0&modestbranding=1&playsinline=1&rel=0"
                             title="Bali scenic video"
                             frameBorder="0"

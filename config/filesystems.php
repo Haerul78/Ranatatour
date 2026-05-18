@@ -1,5 +1,8 @@
 <?php
 
+/** @phpstan-ignore-file */
+require_once __DIR__ . '/../stubs/helpers.php';
+
 return [
 
     /*

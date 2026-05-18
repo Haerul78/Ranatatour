@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import MainLayout from "../Layouts/MainLayout";
 
-export default function AboutUs({ about = null }) {
+export default function AboutUs() {
     const stats = [
         { number: "15+", label: "Tahun Pengalaman" },
         { number: "50K+", label: "Wisatawan Puas" },
@@ -156,14 +156,6 @@ export default function AboutUs({ about = null }) {
         },
     };
 
-    const aboutTitle = about?.about_title || "Tentang Kami";
-    const aboutSummary =
-        about?.about_summary ||
-        "Menciptakan kenangan indah dalam setiap perjalanan";
-    const aboutBody =
-        about?.about_body ||
-        "Ranatatour dimulai dengan visi sederhana untuk membuat perjalanan menjadi lebih mudah, aman, dan menyenangkan.";
-
     return (
         <MainLayout>
             {/* Hero Section */}
@@ -182,9 +174,9 @@ export default function AboutUs({ about = null }) {
                     transition={{ duration: 0.8 }}
                 >
                     <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
-                        {aboutTitle.split(" ")[0]} <span className="text-merah-ranata">{aboutTitle.split(" ").slice(1).join(" ") || "Kami"}</span>
+                        Tentang <span className="text-merah-ranata">Kami</span>
                     </h1>
-                    <p className="text-xl text-gray-300">{aboutSummary}</p>
+                    <p className="text-xl text-gray-300">Menciptakan kenangan indah dalam setiap perjalanan</p>
                 </motion.div>
             </section>
 
@@ -202,10 +194,10 @@ export default function AboutUs({ about = null }) {
                                 Perjalanan Kami Dimulai dari <span className="text-merah-ranata">Passion</span>
                             </h2>
                             <p className="text-gray-700 mb-4 leading-relaxed">
-                                {aboutBody}
+                                Ranatatour dimulai dengan visi sederhana untuk membuat perjalanan menjadi lebih mudah, aman, dan menyenangkan. Dengan pengalaman lebih dari 15 tahun di industri pariwisata, kami memahami apa yang dibutuhkan setiap traveler.
                             </p>
                             <p className="text-gray-700 mb-6 leading-relaxed">
-                                Kami percaya bahwa setiap perjalanan adalah petualangan yang unik. Oleh karena itu, kami menyediakan paket tour yang fleksibel dan disesuaikan dengan kebutuhan setiap klien.
+                                Kami percaya bahwa setiap perjalanan adalah petualangan yang unik. Oleh karena itu, kami menyediakan paket tour yang fleksibel dan disesuaikan dengan kebutuhan setiap klien. Dari backpacker hingga keluarga besar, kami siap membantu mewujudkan impian liburan Anda.
                             </p>
                             <button className="bg-merah-ranata hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300">
                                 Hubungi Kami

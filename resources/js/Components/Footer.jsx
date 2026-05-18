@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="-mx-6 -mb-16 mt-20 bg-[#f7ece6] px-6 py-12 md:mx-0 md:mb-0 md:px-10">
+        <footer className="mt-20 bg-[#f7ece6]">
             <div className="mx-auto grid max-w-6xl gap-10 px-6 py-12 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:px-10">
                 <div>
                     <h4 className="text-lg font-semibold text-merah-ranata">Ranatatour</h4>

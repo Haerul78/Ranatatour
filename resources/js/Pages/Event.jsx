@@ -1,6 +1,6 @@
 import MainLayout from "../Layouts/MainLayout";
 
-export default function Event({ events: eventsProp = [] }) {
+export default function Event() {
     const filters = ["Semua", "Budaya", "Seni", "Musik", "Olahraga", "Festival"];
 
     const events = [
@@ -53,17 +53,6 @@ export default function Event({ events: eventsProp = [] }) {
             badge: "Festival",
         },
     ];
-
-    const eventItems = eventsProp.length
-        ? eventsProp.map(item => ({
-              title: item.title,
-              location: item.location || "",
-              date: item.date || "",
-              price: item.price || "",
-              image: item.image_url || "/images/Bali.jpg",
-              badge: item.badge || "Event",
-          }))
-        : events;
 
     return (
         <MainLayout>
@@ -135,7 +124,7 @@ export default function Event({ events: eventsProp = [] }) {
                 </div>
 
                 <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {eventItems.map(item => (
+                    {events.map(item => (
                         <article key={item.title} className="overflow-hidden rounded-2xl bg-white shadow-sm">
                             <div className="relative h-48">
                                 <img src={item.image} alt={item.title} className="h-full w-full object-cover" />

@@ -48,3 +48,7 @@ Route::middleware('admin.session')->prefix('admin')->group(function () {
     Route::get('settings', [SettingsController::class, 'edit']);
     Route::put('settings', [SettingsController::class, 'update']);
 });
+
+Route::get('/event', function () {
+    return Inertia::render('Event');
+});

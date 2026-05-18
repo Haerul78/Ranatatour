@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import MainLayout from "../Layouts/MainLayout";
 
-export default function Contact({ contact = null }) {
+export default function Contact() {
     const contactItems = [
         {
             label: "Alamat",
-            value: contact?.contact_address || "Jl. Tanah Abang No.12, Jakarta Pusat, DKI Jakarta 10230",
+            value: "Jl. Tanah Abang No.12, Jakarta Pusat, DKI Jakarta 10230",
             icon: (
                 <svg
                     viewBox="0 0 24 24"
@@ -23,7 +23,7 @@ export default function Contact({ contact = null }) {
         },
         {
             label: "Telepon",
-            value: contact?.contact_phone || "(+62) 812 3456 7890",
+            value: "(+62) 812 3456 7890",
             icon: (
                 <svg
                     viewBox="0 0 24 24"
@@ -40,7 +40,7 @@ export default function Contact({ contact = null }) {
         },
         {
             label: "Email",
-            value: contact?.contact_email || "info@ranatatour.com",
+            value: "info@ranatatour.com",
             icon: (
                 <svg
                     viewBox="0 0 24 24"
@@ -58,7 +58,7 @@ export default function Contact({ contact = null }) {
         },
         {
             label: "Jam Operasional",
-            value: contact?.contact_hours || "Senin - Jumat, 08.00 - 18.00 WIB",
+            value: "Senin - Jumat, 08.00 - 18.00 WIB",
             icon: (
                 <svg
                     viewBox="0 0 24 24"
@@ -165,7 +165,7 @@ export default function Contact({ contact = null }) {
                         <div className="relative w-full max-w-215 aspect-video">
                             <iframe
                                 className="absolute inset-0 h-full w-full"
-                                src={contact?.contact_map_url || "https://www.youtube.com/embed/rAx1qYtXI28?controls=1&modestbranding=1&playsinline=1&rel=0"}
+                                src="https://www.youtube.com/embed/rAx1qYtXI28?controls=1&modestbranding=1&playsinline=1&rel=0"
                                 title="Lokasi Ranata Tour"
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
