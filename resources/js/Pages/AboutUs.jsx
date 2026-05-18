@@ -121,18 +121,28 @@ export default function AboutUs() {
     const teamMembers = [
         {
             name: "Adi Supriyanto",
-            position: "Tour Guide",
-            image: "/images/Bali.jpg",
+            position: "Senior Tour Guide",
+            image: "/images/person_lakilaki.png",
         },
         {
             name: "Siti Nurhaliza",
             position: "Tour Coordinator",
-            image: "/images/Borobudur.jpg",
+            image: "/images/person_perempuan.png",
         },
         {
             name: "Ahmad Wijaya",
-            position: "Travel Agent",
-            image: "/images/Bali.jpg",
+            position: "Travel Consultant",
+            image: "/images/person_lakilaki.png",
+        },
+        {
+            name: "Dewi Rahayu",
+            position: "Customer Service",
+            image: "/images/person_perempuan.png",
+        },
+        {
+            name: "Budi Santoso",
+            position: "Tour Manager",
+            image: "/images/person_lakilaki.png",
         },
     ];
 
@@ -364,7 +374,7 @@ export default function AboutUs() {
             {/* Team Section */}
             <section className="py-16 px-4 md:px-8 lg:px-16 bg-[#fdf2ea] border-t border-[#efcfc4]">
                 <div className="max-w-6xl mx-auto">
-                    <motion.div 
+                    <motion.div
                         className="text-center mb-10"
                         initial={{ opacity: 0, y: -20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -374,34 +384,7 @@ export default function AboutUs() {
                         <h2 className="text-2xl md:text-3xl font-semibold text-[#4b2e2b] mb-2">Tim Profesional Kami</h2>
                         <p className="text-xs md:text-sm text-[#7c6f6a] max-w-2xl mx-auto">Dikelola oleh tim ahli di bidang pariwisata</p>
                     </motion.div>
-
-                    <motion.div 
-                        className="grid md:grid-cols-3 gap-6"
-                        variants={containerVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                    >
-                        {teamMembers.map((member, index) => (
-                            <motion.div 
-                                key={index}
-                                className="text-center bg-white rounded-2xl border border-[#f1e3dd] shadow-[0_10px_24px_rgba(0,0,0,0.08)]"
-                                variants={itemVariants}
-                            >
-                                <div className="relative overflow-hidden rounded-2xl h-44">
-                                    <img 
-                                        src={member.image} 
-                                        alt={member.name}
-                                        className="w-full h-full object-cover"
-                                    />
-                                </div>
-                                <div className="px-4 py-4">
-                                    <h3 className="text-sm font-semibold text-[#4b2e2b]">{member.name}</h3>
-                                    <p className="text-xs text-[#7c6f6a]">{member.position}</p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </motion.div>
+                    <TeamSlider members={teamMembers} />
                 </div>
             </section>
 
@@ -423,5 +406,58 @@ export default function AboutUs() {
                 </div>
             </section>
         </MainLayout>
+    );
+}
+
+function TeamSlider({ members }) {
+    const doubled = [...members, ...members];
+
+    return (
+        <div
+            className="overflow-hidden"
+            style={{
+                WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+                maskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+            }}
+        >
+            <style>{`
+                @keyframes teamMarquee {
+                    0%   { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                }
+                .team-track {
+                    animation: teamMarquee 20s linear infinite;
+                }
+                .team-track:hover {
+                    animation-play-state: paused;
+                }
+            `}</style>
+
+            <div className="team-track flex">
+                {doubled.map((member, i) => (
+                    <div key={i} style={{ width: 272, flexShrink: 0, padding: "0 12px" }}>
+                        <div className="bg-white rounded-2xl border border-[#f1e3dd] shadow-[0_10px_24px_rgba(0,0,0,0.08)] overflow-hidden text-center h-full">
+                            <div className="h-56 overflow-hidden bg-[#fdf2ea]">
+                                <img
+                                    src={member.image}
+                                    alt={member.name}
+                                    className="h-full w-full object-cover object-top"
+                                    onError={e => { e.target.style.display = "none"; }}
+                                />
+                            </div>
+                            <div className="px-5 py-4">
+                                <h3 className="text-sm font-semibold text-[#4b2e2b]">{member.name}</h3>
+                                <p className="mt-0.5 text-xs text-[#9b8f8a]">{member.position}</p>
+                                <div className="mt-3 flex justify-center gap-1.5">
+                                    {["bg-[#991612]", "bg-[#c76854]", "bg-[#e3a39f]"].map((c, j) => (
+                                        <span key={j} className={`h-1 w-4 rounded-full ${c}`} />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 }
