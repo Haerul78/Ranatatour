@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import MainLayout from "../Layouts/MainLayout";
 import Hero from "../Components/Hero";
 
-export default function Home() {
+export default function Home({ tours = [], events: eventsProp = [], articles = [], clients = [] }) {
     const destinationSliderRef = useRef(null);
     const eventSliderRef = useRef(null);
     const storySliderRef = useRef(null);
+    const clientSliderRef = useRef(null);
+    const [activeClientSlide, setActiveClientSlide] = useState(0);
 
     const handleScroll = (ref, direction) => {
         if (!ref.current) {
@@ -15,6 +17,16 @@ export default function Home() {
 
         const offset = direction === "left" ? -320 : 320;
         ref.current.scrollBy({ left: offset, behavior: "smooth" });
+    };
+
+    const handleClientScroll = () => {
+        if (!clientSliderRef.current) {
+            return;
+        }
+
+        const { scrollLeft, clientWidth } = clientSliderRef.current;
+        const nextIndex = Math.round(scrollLeft / clientWidth);
+        setActiveClientSlide(nextIndex);
     };
 
     const destinations = [
@@ -150,6 +162,133 @@ export default function Home() {
         },
     ];
 
+    const contactItems = [
+        {
+            label: "Alamat",
+            value: "Jl. Tanah Abang No.12, Jakarta Pusat, DKI Jakarta 10230",
+            icon: (
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-4 w-4"
+                >
+                    <path d="M12 21s7-6.4 7-12a7 7 0 1 0-14 0c0 5.6 7 12 7 12Z" />
+                    <circle cx="12" cy="9" r="2.5" />
+                </svg>
+            ),
+        },
+        {
+            label: "Telepon",
+            value: "(+62) 812 3456 7890",
+            icon: (
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-4 w-4"
+                >
+                    <path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 6.2 2 2 0 0 1 5.1 4h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1l-1.1 1.1a16 16 0 0 0 6.8 6.8l1.1-1.1a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z" />
+                </svg>
+            ),
+        },
+        {
+            label: "Email",
+            value: "info@ranatatour.com",
+            icon: (
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-4 w-4"
+                >
+                    <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" />
+                    <path d="m22 8-10 6L2 8" />
+                </svg>
+            ),
+        },
+        {
+            label: "Jam Operasional",
+            value: "Senin - Jumat, 08.00 - 18.00 WIB",
+            icon: (
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-4 w-4"
+                >
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v5l3 3" />
+                </svg>
+            ),
+        },
+    ];
+
+    const destinationItems = tours.length
+        ? tours.map(item => ({
+              title: item.title,
+              location: item.location || "",
+              price: item.price || "",
+              image: item.image_url || "/images/Bali.jpg",
+              badge: item.badge || "Popular",
+          }))
+        : destinations;
+
+    const eventItems = eventsProp.length
+        ? eventsProp.map(item => ({
+              title: item.title,
+              location: item.location || "",
+              price: item.price || "",
+              image: item.image_url || "/images/Bali.jpg",
+              badge: item.badge || "Event",
+          }))
+        : events;
+
+    const storyItems = articles.length
+        ? articles.map(item => ({
+              title: item.title,
+              date: item.published_at || "",
+              image: item.image_url || "/images/Bali.jpg",
+              label: item.label || "Cerita",
+          }))
+        : stories;
+
+    const defaultClients = [
+        "Pertamina",
+        "BRI",
+        "Telkom",
+        "Garuda",
+        "Mandiri",
+        "PLN",
+        "BCA",
+        "Astra",
+        "Unilever",
+        "Sinarmas",
+        "Indofood",
+        "Gojek",
+    ];
+
+    const clientItems = clients.length ? clients.map(item => item.name) : defaultClients;
+    const clientChunks = clientItems.reduce((chunks, item, index) => {
+        if (index % 6 === 0) {
+            chunks.push([]);
+        }
+        chunks[chunks.length - 1].push(item);
+        return chunks;
+    }, []);
+
     return (
         <MainLayout>
             <div className="-mx-6 md:-mx-10">
@@ -200,9 +339,9 @@ export default function Home() {
                         ref={destinationSliderRef}
                         className="flex flex-nowrap gap-4 overflow-x-auto pb-2 scrollbar-hide px-4"
                     >
-                        {destinations.map(item => (
+                        {destinationItems.map((item, index) => (
                             <article
-                                key={item.title}
+                                key={`${item.title}-${index}`}
                                 className="w-[70%] flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-sm sm:w-[45%] md:w-[32%] lg:w-[calc(25%-12px)]"
                             >
                                 <div className="relative h-40">
@@ -274,33 +413,50 @@ export default function Home() {
                         <span className="text-lg">&#8594;</span>
                     </button>
 
-                    <div
-                        ref={eventSliderRef}
-                        className="flex flex-nowrap gap-4 overflow-x-auto pb-2 scrollbar-hide px-4"
-                    >
-                        {events.map(item => (
-                            <article
-                                key={item.title}
-                                className="w-[70%] flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-sm sm:w-[45%] md:w-[32%] lg:w-[calc(25%-12px)]"
-                            >
-                                <div className="relative h-40">
-                                    <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
-                                    <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase text-merah-ranata">
-                                        {item.badge}
-                                    </span>
-                                </div>
-                                <div className="space-y-2 p-4">
-                                    <h3 className="text-sm font-semibold text-[#4b2e2b]">{item.title}</h3>
-                                    <p className="text-xs text-[#9b8f8a]">{item.location}</p>
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-sm font-semibold text-merah-ranata">{item.price}</span>
-                                        <span className="text-xs text-[#9b8f8a]">12 Mei 2026</span>
-                                    </div>
-                                </div>
-                            </article>
-                        ))}
+        <div
+            ref={eventSliderRef}
+            className="flex snap-x snap-mandatory flex-nowrap gap-4 overflow-x-auto pb-2 scrollbar-hide px-1"
+        >
+            {eventItems.map(item => (
+                <article
+                    key={item.title}
+                    className="w-[42%] snap-start flex-shrink-0 overflow-hidden rounded-xl bg-white shadow-sm sm:w-[32%] md:w-[25%] lg:w-[calc(25%-12px)]"
+                >
+                    <div className="relative h-28 sm:h-36 md:h-40">
+                        <img
+                            src={item.image}
+                            alt={item.title}
+                            className="h-full w-full object-cover"
+                        />
+
+                        <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase text-merah-ranata">
+                            {item.badge}
+                        </span>
                     </div>
-                </div>
+
+                    <div className="space-y-1 p-3 sm:p-4">
+                        <h3 className="text-xs font-semibold text-[#4b2e2b] sm:text-sm">
+                            {item.title}
+                        </h3>
+
+                        <p className="text-xs text-[#9b8f8a] sm:text-sm">
+                            {item.location}
+                        </p>
+
+                        <div className="flex items-center justify-between">
+                            <span className="text-xs font-semibold text-merah-ranata sm:text-sm">
+                                {item.price}
+                            </span>
+
+                            <span className="text-xs text-[#9b8f8a] sm:text-sm">
+                                {item.date || "12 Mei 2026"}
+                            </span>
+                        </div>
+                    </div>
+                </article>
+            ))}
+        </div>
+    </div>
 
                 <div className="mt-8 flex justify-center">
                     <button
@@ -338,32 +494,50 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div
-                    ref={storySliderRef}
-                    className="mt-10 flex flex-nowrap gap-6 overflow-x-auto pb-2 scrollbar-hide"
-                >
-                    {stories.map(item => (
-                        <article
-                            key={item.title}
-                            className="w-[80%] flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-sm sm:w-[55%] md:w-[40%] lg:w-[calc(33.333%-16px)]"
-                        >
-                            <div className="relative h-44">
-                                <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
-                                <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase text-merah-ranata">
-                                    {item.label}
-                                </span>
-                            </div>
-                            <div className="space-y-3 p-5">
-                                <p className="text-xs text-[#9b8f8a]">{item.date}</p>
-                                <h3 className="text-sm font-semibold text-[#4b2e2b]">{item.title}</h3>
-                                <button type="button" className="text-xs font-semibold text-merah-ranata">
-                                    Baca Selengkapnya →
-                                </button>
-                            </div>
-                        </article>
-                    ))}
+    <div
+        ref={storySliderRef}
+        className="mt-10 flex snap-x snap-mandatory flex-nowrap gap-4 overflow-x-auto pb-2 scrollbar-hide"
+    >
+        {storyItems.map(item => (
+            <article
+                key={item.title}
+                className="w-[42%] snap-start flex-shrink-0 overflow-hidden rounded-xl bg-white shadow-sm sm:w-[32%] md:w-[25%] lg:w-[calc(25%-12px)]"
+            >
+                <div className="relative h-28 sm:h-36 md:h-40">
+                    <img
+                        src={item.image}
+                        alt={item.title}
+                        className="h-full w-full object-cover"
+                    />
+
+                    <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase text-merah-ranata">
+                        {item.label}
+                    </span>
                 </div>
-            </section>
+
+                <div className="space-y-1 p-3 sm:p-4">
+                    <p className="text-xs text-[#9b8f8a]">
+                        {item.date}
+                    </p>
+
+                    <h3 className="text-xs font-semibold text-[#4b2e2b] sm:text-sm">
+                        {item.title}
+                    </h3>
+
+                    <button
+                        type="button"
+                        className="group inline-flex items-center gap-1 text-xs font-semibold text-merah-ranata"
+                    >
+                        <span className="relative after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-merah-ranata after:transition after:duration-300 group-hover:after:scale-x-100">
+                            Baca Selengkapnya
+                        </span>
+                        <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    </button>
+                </div>
+            </article>
+        ))}
+    </div>
+</section>
 
             <section className="-mx-6 mt-20 bg-merah-ranata text-white md:-mx-10">
                 <div className="relative mx-auto max-w-6xl overflow-visible px-6 py-14 md:px-10">
@@ -456,28 +630,55 @@ export default function Home() {
                         </p>
                     </div>
 
-                    <div className="mt-10 grid gap-6 text-center text-sm font-semibold text-[#8b7f7a] sm:grid-cols-2 md:grid-cols-4">
-                        {[
-                            "Pertamina",
-                            "BRI",
-                            "Telkom",
-                            "Garuda",
-                            "Mandiri",
-                            "PLN",
-                            "BCA",
-                            "Astra",
-                            "Unilever",
-                            "Sinarmas",
-                            "Indofood",
-                            "Gojek",
-                        ].map(client => (
-                            <div key={client} className="tracking-[0.15em] uppercase">
-                                {client}
-                            </div>
-                        ))}
+        {/* MOBILE SLIDER */}
+        <div className="mt-10 md:hidden">
+            <div
+                ref={clientSliderRef}
+                onScroll={handleClientScroll}
+                className="flex snap-x snap-mandatory overflow-x-auto scrollbar-hide scroll-smooth"
+            >    
+                {/* Slide 1 */}
+                {clientChunks.map((chunk, chunkIndex) => (
+                    <div key={chunkIndex} className="min-w-full snap-center">
+                        <div className="grid grid-cols-3 gap-x-4 gap-y-6 text-center">
+                            {chunk.map(client => (
+                                <div
+                                    key={client}
+                                    className="text-[11px] font-semibold tracking-[0.15em] text-[#8b7f7a] uppercase"
+                                >
+                                    {client}
+                                </div>
+                            ))}
+                        </div>
                     </div>
+                ))}
+            </div>
+
+            {/* Indicator */}
+            <div className="mt-8 flex items-center justify-center gap-2">
+                {clientChunks.map((_, index) => (
+                    <span
+                        key={index}
+                        className={`h-2 rounded-full transition-all duration-300 ${
+                            activeClientSlide === index
+                                ? "w-5 bg-merah-ranata"
+                                : "w-2 bg-[#d8c7c0]"
+                        }`}
+                    />
+                ))}
+            </div>
+        </div>
+
+        {/* DESKTOP GRID */}
+        <div className="mt-10 hidden gap-6 text-center text-sm font-semibold text-[#8b7f7a] sm:grid-cols-2 md:grid md:grid-cols-4">
+            {clientItems.map(client => (
+                <div key={client} className="tracking-[0.15em] uppercase">
+                    {client}
                 </div>
-            </section>
+            ))}
+        </div>
+    </div>
+</section>
 
             <section className="mx-auto mt-20 max-w-6xl px-6 md:px-10">
                 <div className="text-center">

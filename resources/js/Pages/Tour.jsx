@@ -1,6 +1,6 @@
 import MainLayout from "../Layouts/MainLayout";
 
-export default function Tour() {
+export default function Tour({ tours = [] }) {
     const filters = ["Semua", "Bali", "Jakarta", "Yogyakarta", "Surabaya", "Bandung"];
 
     const packages = [
@@ -53,6 +53,17 @@ export default function Tour() {
             badge: "Rp 6.500.000",
         },
     ];
+
+    const tourItems = tours.length
+        ? tours.map(item => ({
+              title: item.title,
+              location: item.location || "",
+              price: item.price || "",
+              duration: item.duration || "",
+              image: item.image_url || "/images/Bali.jpg",
+              badge: item.badge || item.price || "",
+          }))
+        : packages;
 
     return (
         <MainLayout>
@@ -113,7 +124,7 @@ export default function Tour() {
                 </div>
 
                 <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {packages.map(item => (
+                    {tourItems.map(item => (
                         <article key={item.title} className="overflow-hidden rounded-2xl bg-white shadow-sm">
                             <div className="relative h-48">
                                 <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
